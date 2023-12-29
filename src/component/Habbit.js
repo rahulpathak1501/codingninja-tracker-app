@@ -1,5 +1,4 @@
 function Habbit({ habit }) {
-  //console.log(habit);
   return (
     <div className="Habbit">
       <div className="container">

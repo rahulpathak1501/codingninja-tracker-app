@@ -1,6 +1,7 @@
 //import { useState } from "react";
 import Habbit from "./Habbit";
 import NavBar from "./NavBar";
+import HabitTrackerWeekView from "./HabitTrackerWeekView";
 //import AddHabit from "./AddHabit";
 import { switchComponents, addHabit } from "../Action";
 import { useReducer, useState } from "react";
@@ -29,7 +30,7 @@ function App({ store }) {
   return (
     <div className="App">
       <NavBar />
-      {switchCom && (
+      {/* {switchCom && (
         <>
           {habitList.map((habit, index) => (
             <Habbit habit={habit} key={index} />
@@ -47,7 +48,8 @@ function App({ store }) {
             <button>Submit</button>
           </form>
         </div>
-      )}
+      )} */}
+      <HabitTrackerWeekView habits={habitList} />
     </div>
   );
 }

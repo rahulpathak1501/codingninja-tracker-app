@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* This will hide horizontal overflow */
+  overflow-y: auto; 
 }
 
 code {
@@ -19,13 +21,13 @@ code {
   width: 100%;
   height: 100%;
 }
-.NavBar{
+.NavBar {
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
   width: 100%;
 }
-.Habbit{
+.Habbit {
   display: flex;
   justify-content: center;
   border: solid black 2px;
@@ -38,10 +40,9 @@ code {
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  
 }
 
-.habit-nav {
+.habits {
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
@@ -61,7 +62,85 @@ code {
   margin: 5px;
 }
 
-.add-habit{
+.add-habit {
   display: flex;
   width: 100%;
+}
+
+.habit-tracker-week-view {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 5px;
+  margin: 5px;
+}
+
+.habit-tracker-week-view .habits {
+  margin: 0;
+  padding: 0;
+}
+
+.habit-info {
+  display: flex;
+  justify-content: space-between;
+  border: solid black 2px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.months {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.day-of-the-week {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  height: 40px;
+}
+
+.habit-tracker-week-view .habits,
+.habit-tracker-week-view .day-of-the-week {
+  display: flex;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.habit-tracker-week-view .day-of-the-week label {
+  margin: 5px;
+  padding: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.habit-dates {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  /* padding: 5px;
+  margin-left: 8px;
+  margin-right: 10px; */
+}
+
+.habit-date {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 5px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 16px;
+  width: 40px; 
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+}
+
+.habit-date:hover {
+  background-color: #ddd;
+  cursor: pointer;
 }
