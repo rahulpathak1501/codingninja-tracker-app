@@ -144,3 +144,15 @@ code {
   background-color: #ddd;
   cursor: pointer;
 }
+.done{
+  background-image: url("https://img.icons8.com/color/60/checkmark--v1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.not-done{
+  background-image: url("https://img.icons8.com/color/48/delete-sign.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

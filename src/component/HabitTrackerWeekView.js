@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import {
   format,
   subWeeks,
@@ -12,6 +12,9 @@ function HabitTrackerWeekView({ habits }) {
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [habitStatuses, setHabitStatuses] = useState({});
+  useEffect(() => {
+    console.log("Current State:", habitStatuses);
+  }, [habitStatuses]);
 
   const weekdays = [
     "Sunday",
@@ -51,16 +54,17 @@ function HabitTrackerWeekView({ habits }) {
     setCurrentMonth(addWeeks(currentMonth, 1));
     forceUpdate();
   };
-  let toggleHandle = 0;
+  //   let toggleHandle = 0;
   const handleTodaysStatus = (date, habit) => {
-    console.log(date);
+    // console.log(habitStatuses);
     if (isNaN(date)) {
       console.error("Invalid date:", date);
       return;
     }
-    const key = `${format(date, "dd")}-${habit}`;
+    const key = `${date}-${habit}`;
     setHabitStatuses((prevStatuses) => {
       const currentStatus = prevStatuses[key] || "none";
+
       const newStatus =
         currentStatus === "none"
           ? "done"
@@ -69,6 +73,7 @@ function HabitTrackerWeekView({ habits }) {
           : "none";
       return { ...prevStatuses, [key]: newStatus };
     });
+    // console.log(habitStatuses);
   };
 
   return (
@@ -108,7 +113,15 @@ function HabitTrackerWeekView({ habits }) {
             <div className="habit-dates">
               {dates.map((date) => (
                 <div
-                  className="habit-date"
+                  className={`habit-date ${
+                    habitStatuses[`${date}-${habit}`] === "done"
+                      ? "done"
+                      : `${
+                          habitStatuses[`${date}-${habit}`] === "not done"
+                            ? "not-done"
+                            : ""
+                        }`
+                  }`}
                   onClick={() => handleTodaysStatus(date, habit)}
                 >
                   {date}
