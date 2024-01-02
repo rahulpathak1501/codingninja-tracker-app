@@ -8,9 +8,8 @@ function Habbit({ habits }) {
       <div className="container">
         <div className="habit-nav">
           <div className="right">{habits}</div>
-          <div className="left">time</div>
         </div>
-        <input type="checkbox" />
+        {/* <input type="checkbox" /> */}
         <div className="habit-footer">
           <div className="day-count">{doneCount[habits]} Days</div>
           {/* <div className="streak"> 9 best</div> */}

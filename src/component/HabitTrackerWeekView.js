@@ -22,7 +22,7 @@ function HabitTrackerWeekView() {
     habitList.reduce((counts, habit) => ({ ...counts, [habit]: 0 }), {})
   );
   useEffect(() => {
-    console.log(habitDoneCounts);
+    // console.log(habitDoneCounts);
     dispatch(countDoneStatuses(habitDoneCounts));
   });
 
@@ -101,7 +101,6 @@ function HabitTrackerWeekView() {
       }));
       return { ...prevStatuses, [key]: newStatus };
     });
-    // console.log(habitStatuses);
   };
 
   return (
