@@ -2,26 +2,27 @@
 import Habbit from "./Habbit";
 import NavBar from "./NavBar";
 import HabitTrackerWeekView from "./HabitTrackerWeekView";
-//import AddHabit from "./AddHabit";
 import { switchComponents, addHabit } from "../Action";
 import { useReducer, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function App({ store }) {
-  //console.log(store.getState());
+function App() {
+  const dispatch = useDispatch();
+
+  const habitList = useSelector((state) => state.habitList);
+  const switchCom = useSelector((state) => state.switchCom);
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   const [newHabit, setNewHabit] = useState("");
-  const { habitList, switchCom } = store.getState().habits;
-  //console.log(switchCom);
+
   const newHabitButton = () => {
-    store.dispatch(switchComponents(false));
-    forceUpdate();
+    dispatch(switchComponents(false));
   };
 
   const handleNewHabit = (e) => {
     e.preventDefault();
     if (newHabit !== "") {
-      store.dispatch(addHabit(newHabit));
-      store.dispatch(switchComponents(true));
+      dispatch(addHabit(newHabit));
+      dispatch(switchComponents(true));
     }
 
     forceUpdate();
@@ -30,10 +31,10 @@ function App({ store }) {
   return (
     <div className="App">
       <NavBar />
-      {/* {switchCom && (
+      {switchCom && (
         <>
           {habitList.map((habit, index) => (
-            <Habbit habit={habit} key={index} />
+            <Habbit habits={habit} key={index} />
           ))}
           <button onClick={newHabitButton}>Add New Habit</button>
         </>
@@ -44,12 +45,13 @@ function App({ store }) {
             <input
               type="text"
               onChange={(habit) => setNewHabit(habit.target.value)}
+              required
             />
             <button>Submit</button>
           </form>
         </div>
-      )} */}
-      <HabitTrackerWeekView habits={habitList} />
+      )}
+      <HabitTrackerWeekView />
     </div>
   );
 }

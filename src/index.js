@@ -4,12 +4,13 @@ import "./index.css";
 import App from "./component/App";
 import { createStore } from "redux";
 import rootreducer from "./Reducer";
+import { Provider } from "react-redux";
 
 const store = createStore(rootreducer);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App store={store} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>
 );

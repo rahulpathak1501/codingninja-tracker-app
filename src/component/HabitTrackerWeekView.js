@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { countDoneStatuses } from "../Action";
 import {
   format,
   subWeeks,
@@ -7,14 +8,22 @@ import {
   eachDayOfInterval,
   addWeeks,
 } from "date-fns";
+import { useDispatch, useSelector } from "react-redux";
 
-function HabitTrackerWeekView({ habits }) {
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+function HabitTrackerWeekView() {
+  const dispatch = useDispatch();
+
+  const habitList = useSelector((state) => state.habitList);
+  // const currentMonth = useSelector(state => state.currentMonth);
+  // const doneCount = useSelector((state) => state.doneCount);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [habitStatuses, setHabitStatuses] = useState({});
+  const [habitDoneCounts, setHabitDoneCounts] = useState(
+    habitList.reduce((counts, habit) => ({ ...counts, [habit]: 0 }), {})
+  );
   useEffect(() => {
-    console.log("Current State:", habitStatuses);
-  }, [habitStatuses]);
+    dispatch(countDoneStatuses(habitDoneCounts));
+  });
 
   const weekdays = [
     "Sunday",
@@ -42,7 +51,6 @@ function HabitTrackerWeekView({ habits }) {
   const dates = getCurrentWeekDates();
   const handlePreviousWeek = () => {
     setCurrentMonth(subWeeks(currentMonth, 1));
-    forceUpdate();
   };
 
   const getMonthYear = () => {
@@ -52,15 +60,25 @@ function HabitTrackerWeekView({ habits }) {
 
   const handleNextWeek = () => {
     setCurrentMonth(addWeeks(currentMonth, 1));
-    forceUpdate();
   };
-  //   let toggleHandle = 0;
+
   const handleTodaysStatus = (date, habit) => {
-    // console.log(habitStatuses);
-    if (isNaN(date)) {
-      console.error("Invalid date:", date);
-      return;
-    }
+    // const currentDate = new Date();
+    // const currentYear = currentDate.getFullYear();
+    // const currentMonth = currentDate.getMonth() + 1;
+    // console.log(currentMonth);
+
+    // const clickedDate = new Date().setHours(0, 0, 0, 0);
+    // // console.log(clickedDate);
+
+    // if (clickedDate < currentDate) {
+    //   alert("Can Not Modify future dates");
+    //   return;
+    // }
+    // if (isNaN(date)) {
+    //   console.error("Invalid date:", date);
+    //   return;
+    // }
     const key = `${date}-${habit}`;
     setHabitStatuses((prevStatuses) => {
       const currentStatus = prevStatuses[key] || "none";
@@ -71,6 +89,13 @@ function HabitTrackerWeekView({ habits }) {
           : currentStatus === "done"
           ? "not done"
           : "none";
+      setHabitDoneCounts((prevCounts) => ({
+        ...prevCounts,
+        [habit]:
+          newStatus === "done"
+            ? prevCounts[habit] + 1
+            : Math.max(0, prevCounts[habit] - 1),
+      }));
       return { ...prevStatuses, [key]: newStatus };
     });
     // console.log(habitStatuses);
@@ -104,7 +129,7 @@ function HabitTrackerWeekView({ habits }) {
       </div>
       {/* <h1>Habit Tracker</h1> */}
       <div className="habits">
-        {habits.map((habit) => (
+        {habitList.map((habit) => (
           <>
             <div className="habit-info">
               <div className="habit-name">{habit}</div>
