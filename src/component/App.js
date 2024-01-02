@@ -3,7 +3,7 @@ import Habbit from "./Habbit";
 import NavBar from "./NavBar";
 import HabitTrackerWeekView from "./HabitTrackerWeekView";
 import { switchComponents, addHabit } from "../Action";
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
@@ -11,7 +11,6 @@ function App() {
 
   const habitList = useSelector((state) => state.habitList);
   const switchCom = useSelector((state) => state.switchCom);
-  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
   const [newHabit, setNewHabit] = useState("");
 
   const newHabitButton = () => {
@@ -24,8 +23,6 @@ function App() {
       dispatch(addHabit(newHabit));
       dispatch(switchComponents(true));
     }
-
-    forceUpdate();
   };
 
   return (

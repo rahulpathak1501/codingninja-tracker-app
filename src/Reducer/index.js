@@ -3,7 +3,6 @@ import {
   ADD_HABIT,
   SWITCH_COM,
   UPDATE_CURRENT_MONTH,
-  UPDATE_HABIT_STATUSES,
   COUNT_DONE_STATUSES,
 } from "../Action";
 
@@ -11,7 +10,6 @@ const initialHabitState = {
   habitList: ["Gym", "Running", "Reading"],
   switchCom: true,
   currentMonth: new Date(),
-  habitStatuses: {},
   doneCount: {},
 };
 
@@ -28,15 +26,9 @@ export default function habits(state = initialHabitState, action) {
         switchCom: action.val,
       };
     case UPDATE_CURRENT_MONTH:
-      console.log("Reducer - Updating current month:", action.month);
       return {
         ...state,
         currentMonth: new Date(action.month),
-      };
-    case UPDATE_HABIT_STATUSES:
-      return {
-        ...state,
-        habitStatuses: { ...state.habitStatuses, ...action.newStatuses },
       };
     case COUNT_DONE_STATUSES:
       return {

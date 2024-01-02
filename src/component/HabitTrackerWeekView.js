@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { countDoneStatuses } from "../Action";
+import { updateCurrentMonth, countDoneStatuses } from "../Action";
 import {
   format,
   subWeeks,
@@ -14,14 +14,15 @@ function HabitTrackerWeekView() {
   const dispatch = useDispatch();
 
   const habitList = useSelector((state) => state.habitList);
-  // const currentMonth = useSelector(state => state.currentMonth);
+  const currentMonth = useSelector((state) => state.currentMonth);
   // const doneCount = useSelector((state) => state.doneCount);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+  // const [currentMonth, setCurrentMonth] = useState(new Date());
   const [habitStatuses, setHabitStatuses] = useState({});
   const [habitDoneCounts, setHabitDoneCounts] = useState(
     habitList.reduce((counts, habit) => ({ ...counts, [habit]: 0 }), {})
   );
   useEffect(() => {
+    console.log(habitDoneCounts);
     dispatch(countDoneStatuses(habitDoneCounts));
   });
 
@@ -50,7 +51,7 @@ function HabitTrackerWeekView() {
   //console.log(getCurrentWeekDates());
   const dates = getCurrentWeekDates();
   const handlePreviousWeek = () => {
-    setCurrentMonth(subWeeks(currentMonth, 1));
+    dispatch(updateCurrentMonth(subWeeks(currentMonth, 1)));
   };
 
   const getMonthYear = () => {
@@ -59,7 +60,7 @@ function HabitTrackerWeekView() {
   };
 
   const handleNextWeek = () => {
-    setCurrentMonth(addWeeks(currentMonth, 1));
+    dispatch(updateCurrentMonth(addWeeks(currentMonth, 1)));
   };
 
   const handleTodaysStatus = (date, habit) => {
@@ -94,6 +95,8 @@ function HabitTrackerWeekView() {
         [habit]:
           newStatus === "done"
             ? prevCounts[habit] + 1
+            : currentStatus === "not done"
+            ? prevCounts[habit]
             : Math.max(0, prevCounts[habit] - 1),
       }));
       return { ...prevStatuses, [key]: newStatus };
