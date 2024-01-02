@@ -11,7 +11,10 @@ function App() {
 
   const habitList = useSelector((state) => state.habitList);
   const switchCom = useSelector((state) => state.switchCom);
+  const viewType = useSelector((state) => state.viewType);
   const [newHabit, setNewHabit] = useState("");
+
+  console.log(viewType);
 
   const newHabitButton = () => {
     dispatch(switchComponents(false));
@@ -28,27 +31,32 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      {switchCom && (
+      {viewType === "detailView" && (
         <>
-          {habitList.map((habit, index) => (
-            <Habbit habits={habit} key={index} />
-          ))}
-          <button onClick={newHabitButton}>Add New Habit</button>
+          {switchCom ? (
+            <>
+              {habitList.map((habit, index) => (
+                <Habbit habits={habit} key={index} />
+              ))}
+              <button onClick={newHabitButton}>Add New Habit</button>
+            </>
+          ) : (
+            <div className="add-habit">
+              <form onSubmit={handleNewHabit}>
+                <input
+                  className="habit-input"
+                  type="text"
+                  onChange={(habit) => setNewHabit(habit.target.value)}
+                  placeholder="Type a new habit here"
+                  required
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          )}
         </>
       )}
-      {!switchCom && (
-        <div className="add-habit">
-          <form onSubmit={handleNewHabit}>
-            <input
-              type="text"
-              onChange={(habit) => setNewHabit(habit.target.value)}
-              required
-            />
-            <button>Submit</button>
-          </form>
-        </div>
-      )}
-      <HabitTrackerWeekView />
+      {viewType === "weeklyView" && <HabitTrackerWeekView />}
     </div>
   );
 }

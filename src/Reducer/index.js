@@ -4,6 +4,7 @@ import {
   SWITCH_COM,
   UPDATE_CURRENT_MONTH,
   COUNT_DONE_STATUSES,
+  UPDATE_VIEW,
 } from "../Action";
 
 const initialHabitState = {
@@ -11,6 +12,7 @@ const initialHabitState = {
   switchCom: true,
   currentMonth: new Date(),
   doneCount: {},
+  viewType: "detailView",
 };
 
 export default function habits(state = initialHabitState, action) {
@@ -34,6 +36,11 @@ export default function habits(state = initialHabitState, action) {
       return {
         ...state,
         doneCount: action.doneCount,
+      };
+    case UPDATE_VIEW:
+      return {
+        ...state,
+        viewType: action.viewType,
       };
     default:
       return state;
