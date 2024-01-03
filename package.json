@@ -1,7 +1,7 @@
 {
+  "homepage": "https://rahulpathak1501.github.io/codingninja-tracker-app/",
   "name": "habittrackerapp",
   "version": "0.1.0",
-  "homepage": "https://rahulpathak1501.github.io/codingninja-tracker-app/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
