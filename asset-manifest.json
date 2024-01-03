@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/codingninja-tracker-app/static/css/main.9de377b3.css",
+    "main.js": "/codingninja-tracker-app/static/js/main.853f435a.js",
+    "index.html": "/codingninja-tracker-app/index.html",
+    "main.9de377b3.css.map": "/codingninja-tracker-app/static/css/main.9de377b3.css.map",
+    "main.853f435a.js.map": "/codingninja-tracker-app/static/js/main.853f435a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9de377b3.css",
+    "static/js/main.853f435a.js"
+  ]
+}
