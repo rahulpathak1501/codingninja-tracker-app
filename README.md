@@ -16,22 +16,22 @@ This is a simple habit tracker application built with React and Redux. It allows
    cd codingninja-albummanager1 ```
 2. **Install Dependencies:**
 
-    ```bash
+    ``` bash
     Copy code
-    npm install```
+    npm install
 3. **Run the Application:**
-    ```npm start```
+    ```npm start
 
 ## Usage
 
-  -Open the app in your browser.
-  -Navigate between Detail View and Weekly View using the dropdown menu in the NavBar.
-  -Add new habits and track them daily.
+  - Open the app in your browser.
+  - Navigate between Detail View and Weekly View using the dropdown menu in the NavBar.
+  - Add new habits and track them daily.
 
 ## Dependencies
-  -React
-  -Redux
-  -date-fns
+  - React
+  - Redux
+  - date-fns
 
 ## License
   This project is licensed under the MIT License - see the LICENSE file for details.
